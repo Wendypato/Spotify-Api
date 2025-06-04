@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './Login.css';
+import { spotifyAPI } from './api/spotifyAPI';
 
 const Login = () => {
   const [form, setForm] = useState({
-    firstName: '',
+    email: '',
     password: ''
   });
 
@@ -12,23 +13,46 @@ const Login = () => {
     setForm({ ...form, [name]: value });
   };
 
+  const handleLogin = async (e) => {
+  e.preventDefault();
+  const url = 'http://localhost:3000/api/users/login';
+  const data = JSON.stringify({
+    email: form.email,
+    password: form.password
+  });
+  const res = await spotifyAPI(url, 'POST', data, null);
+
+  if (res && res.user && res.user.id){
+    localStorage.setItem('user_id', res.user.id);
+    alert('Login exitoso');
+    window.location.href = "/dashboard";
+  } else {
+    alert('Usuario o contraseña incorrectos');
+    console.error('Login failed');
+  }
+};
+
+
+
+
+
   return (
     <div className="login-wrapper">
       <div className="form-container">
-        <h1>Holla, Welcome Back</h1>
-        <p>Hey, welcome back to your special place</p>
+        <h1>Hola, Bienvenido de vuelta!!</h1>
+        <p>Escucha tus cumbias favoritas</p>
 
-        <div className = "form-group">
+        <div className="form-group">
           <label>
-            First Name
+            Email
             <input
-              type='text'
-              name='firstName'
+              type='email'
+              name='email'
               onChange={handleChange}
-              value={form.firstName}
+              value={form.email}
             />
           </label>
-        
+
           <label>
             Password
             <input
@@ -37,21 +61,19 @@ const Login = () => {
               onChange={handleChange}
               value={form.password}
             />
-            <div className = "options-row">
-              <label className = "remember">
-                <input
-                type = 'checkbox'
-                />
+            <div className="options-row">
+              <label className="remember">
+                <input type='checkbox' />
                 Remember me
               </label>
-              <a href = "#" className = "forgot-password">Forgot Password?</a>
+              <a href="#" className="forgot-password">Forgot Password?</a>
             </div>
           </label>
-
         </div>
-       
 
-        <button className = "button">Sign In</button>
+        <button type="button" onClick={handleLogin} className="button">
+          Sign In
+        </button>
       </div>
 
       <div className="image-container">
