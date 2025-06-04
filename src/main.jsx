@@ -6,6 +6,7 @@ import App from './App.jsx';
 import Login from './Login.jsx';
 import Register from './Register.jsx';
 import Dashboard from './Dashboard.jsx';
+import Favorites from './favorites.jsx';
 
 createRoot(document.getElementById('root')).render(
     <BrowserRouter>
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path = "/dashboard" element={<Dashboard/>}/>
+        <Route path = "/favorites" element={<Favorites/>}/>
       </Routes>
     </BrowserRouter>
 );
