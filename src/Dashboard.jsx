@@ -22,33 +22,42 @@ const Dashboard = () => {
   const [results, setResults] = useState([
 
   ])
+  const [favorites, setFavorites] = useState([]);
   
-const [favorites, setFavorites] = useState([]);
-
   const handleAddFavorite = (result) => {
     const isAlreadyFav = favorites.some((fav) => fav.id === result.id);
+
     if (isAlreadyFav) {
-      console.log('ya esta en favs');
+      console.log("Ya esta en favs");
       setFavorites((prev) => prev.filter((el) => el.id !== result.id));
     } else {
       setFavorites((prev) => [...prev, result]);
     }
   };
+  
+
+
 
   const saveFavs = async () => {
     await createFavs(favorites);
+
   };
+
 
   const createFavs = async (favs) => {
     console.log(favs);
-    const userId = 2;
+    const userId = 2
     const url = `http://localhost:3000/api/users/${userId}/favorites`;
+
+
+
 
     const data = {
       items: favs,
     };
+    console.log("Enviando favoritos al backend:", data);
     const result = await spotifyAPI(url, 'POST', JSON.stringify(data), null);
-    console.log(result);
+    console.log("Respuesta del backend:", result);
   };
   const handleChange = (e) => {
 
@@ -82,6 +91,8 @@ const [favorites, setFavorites] = useState([]);
     if (response && response.tracks && response.tracks.items) {
 
       setResults(response.tracks.items);
+
+
 
       } else {
         console.error('No tracks found or token is invalid', response);
@@ -152,9 +163,13 @@ const [favorites, setFavorites] = useState([]);
             <div>
                 <button className = "btn-play"onClick={() => handlePlay(result.uri)}>Play </button>
                 <button className = "btn-favorite"onClick= {()=>handleAddFavorite(result)}>Add Favorite</button>
+
+
+
             </div>
         </div>
       ))}
+      
     </div>
     </>
   );
