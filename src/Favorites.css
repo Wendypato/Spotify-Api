@@ -1,0 +1,37 @@
+.favorites-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background-color: #191414;
+}
+.favorites-container h2 {
+    margin-bottom: 1rem;
+    font-size: 40px;
+    color: #fff;
+}
+
+.favorites-container p{
+    color: #fff;
+
+}
+
+.message {
+    margin-top: 1rem;
+    color: #fff;
+}
+
+.button{
+    width: 250px;
+    height: 60px;
+    border-radius: 25px;
+    background-color: #1DB954;
+    font-weight: bold;
+    color: #000;
+    align-self: center;
+    border: none;  
+    margin-top: 30px;  
+    font-size: 20px; 
+}
